@@ -31,7 +31,9 @@ export const PATCH = async (request, {params}) => {
         existingPrompt.prompt = prompt;
         existingPrompt.tag = tag;
 
-        return new Response(JSON.stringify(existingPrompt), {status: 200})
+        await existingPrompt.save();
+
+        return new Response("Successfully updated the Prompts", { status: 200 });
     } catch (error) {
         return new Response("Failed to update prompt", {status: 500})
     }
